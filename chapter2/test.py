@@ -1,2 +1,2 @@
-s = ','.join(['いくつかの', 'カンマ', '区切り', '値'])
-print(s)
+squares = {number: number ** 2 for number in range(10)}
+print(squares)
