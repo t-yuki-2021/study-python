@@ -58,3 +58,28 @@ append()はリストメソッドであるため、イタレーションごとに
 '''
 辞書の作成に多くのif分が必要で複雑になる場合は単純なfor文を使用した方が良い
 '''
+
+'''
+イテレーター:単にイテレータープロトコルを実装したコンテナオブジェクト
+イテレータープロトコルとは
+・コンテナなの次の要素を返す
+・イテレーター自身を返す
+>>> i = iter('abc')
+>>> print(next(i))
+a
+>>> print(next(i))
+b
+>>> print(next(i))
+c
+>>> print(next(i))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+forはStopIterationの例外を捕まえるとループを終了するようになっている。
+'''
+
+'''
+カスタムイテレーター
+クラス内に__next__()メソッド
+イテレーターのインスタンスを返す特殊メソッド__iter__()を提供
+'''
