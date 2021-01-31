@@ -172,3 +172,8 @@ with open('/etc/hosts') as hosts:
         if line.startswith('#'):
             continue
         print(line.strip())
+
+'''
+else節をforループの後につけると、break文が使われないで「自然」にループが終了した時だけ
+実行されるコードブロックを追加できる
+'''
