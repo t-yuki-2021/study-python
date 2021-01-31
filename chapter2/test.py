@@ -1,15 +1,15 @@
-class CountDown:
-    def __init__(self, step):
-        self.step = step
-    
-    def __next__(self):
-        if self.step <= 0:
-            raise StopIteration
-        self.step -= 1
-        return self.step
+def repeat(number=3):
+    def actual_decorator(function):
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(number):
+                result = function(*args, **kwargs)
+            return result
+        return wrapper
+    return actual_decorator
 
-    def __iter__(self):
-        return self
+@repeat()
+def bar():
+    print("foo")
 
-for element in CountDown(4):
-    print(element)
+bar()

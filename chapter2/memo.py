@@ -94,3 +94,62 @@ forはStopIterationの例外を捕まえるとループを終了するように�
 send()はyieldの返り値として送った値が返ってくる
 外部のクライアントコードからジェネレーター内にデータを送ることができる
 '''
+
+'''
+デコレーターは関数やメソッドのラッピング(受け取った関数を拡張して返す)処理の見た目を分かりやすくするために導入された
+デコレーターを使用できるのは一般的に1つの引数(デコレーション対象)を受け取れる、名前付きcallable(呼び出し可能)オブジェクト
+名前がつかないlambda構文は使用できない
+'''
+
+'''
+デコレーター関数の中で元の関数を呼び出すサブ関数を定義し、それを返す方法がシンプル
+'''
+def mydecorator(function):
+    def wrapped(*args, **kwargs):
+        #実際の関数を呼び出す前に行う処理
+        result = function(*args, **kwargs)
+        #呼び出し後に行う処理
+        return result
+    #ラッパーをデコレーター済関数として返す
+    return wrapped
+
+
+'''
+デコレーターが複雑なパラメーターを使う必要があったり、
+状態に依存した動作をさせたい場合はクラスの方が適切
+クラスを使ったパラメーターを使わないデコレーター
+'''
+class DecoratorAsClass:
+    def __init__(self, function):
+        self.function = function
+    def __call__(self, *args, **kwargs):
+        #実際の関数を呼び出す前に行う処理
+        result = self.function(*args, **kwargs)
+        #呼び出し後に処理を行い返り値を返す
+        return result
+
+'''
+実際にデコレーターを作成すると、パラメーターを渡したいことがよくある
+この関数がデコレーターとして使用されると2回ラップが行われる
+'''
+def repeat(number=3):
+    def actual_decorator(function):
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(number):
+                result = function(*args, **kwargs)
+            return result
+        return wrapper
+    return actual_decorator
+
+
+'''
+デコレーターはミドルウェアのように使用されて、
+処理の流れを理解したりデバックするのが難しくなる
+汎用的なラッパーに制限されるべき
+デコレーターの一般的な使用方法のパターン
+・引数チェック
+・キャッシュ
+・プロキシ
+・コンテキストプロバイダ
+'''
