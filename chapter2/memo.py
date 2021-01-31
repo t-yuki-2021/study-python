@@ -153,3 +153,22 @@ def repeat(number=3):
 ・プロキシ
 ・コンテキストプロバイダ
 '''
+
+'''
+withはコードブロックの前後で何らかの処理を呼び出すためのシンプルな方法
+try finallyの代わりに使用できる
+'''
+hosts  = open('/etc/hosts')
+try:
+    for line in hosts:
+        if line.startswith('#'):
+            continue
+        print(line.strip())
+finally:
+    hosts.close()
+
+with open('/etc/hosts') as hosts:
+    for line in hosts:
+        if line.startswith('#'):
+            continue
+        print(line.strip())
