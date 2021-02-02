@@ -76,3 +76,16 @@ class VikingPizza(Pizza):
         recommended = super(VikingPizza).recommend()
         recommended.toppings += ['スパム'] * 5
         return recommended
+
+'''
+多重継承階層を使用する場合、主にクラスの初期化が原因でカナリ危険な状態になる
+pythonでは基底クラスの__init__()が暗黙的に呼び出されない
+基底クラスの__init__()は開発者の責任
+'''
+
+'''
+多重継承を避ける
+superの使用に一貫性を持たせる
+階層に含まれる全てのクラスでsuperを使用するか、逆に一切superを使用しないかどちらかにすべき
+コードを明示的にするためにsuperは避けられる傾向にある
+'''

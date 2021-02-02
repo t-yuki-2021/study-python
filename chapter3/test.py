@@ -1,10 +1,13 @@
-class Mama:
-    def says(self):
-        print("宿題をしなさい")
+class A:
+    def __init__(self):
+        print("A", end=" ")
+        super().__init__()
 
-class Sister(Mama):
-    def says(self):
-        super().says()
-        print("後宿題もしなさい")
+class C():
+    def __init__(self):
+        print("C", end=" ")
+        
 
-Sister().says()
+
+print("MRO:", [x.__name__ for x in C.__mro__])
+C()
