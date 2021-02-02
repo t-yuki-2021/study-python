@@ -1,13 +1,7 @@
-class A:
-    def __init__(self):
-        print("A", end=" ")
-        super().__init__()
+class MyClass:
+    __secret_value = 1
 
-class C():
-    def __init__(self):
-        print("C", end=" ")
-        
-
-
-print("MRO:", [x.__name__ for x in C.__mro__])
-C()
+instance_of = MyClass()
+#instance_of.__secret_value
+print(dir(MyClass))
+print(instance_of._MyClass__secret_value)
