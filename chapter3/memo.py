@@ -155,3 +155,49 @@ m = MyClass()
 m.x      
 m.x = 20  
 m.x  
+
+
+'''
+プロパティは属性とそれを処理するメソッドをリンクさせる組み込みディスクリプタ型を提供する
+プロパティはfget引数と3つのオプション(fset, fdel, doc)引数をとる
+メンテナンス性の面で、プロパティを作成する最良の構文はpropateyデコレーターを使用すること
+'''
+
+class Rectangle:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1, self.y1 = x1, y1
+        self.x2, self.y2 = x2, y2
+    def _width_get(self):
+        return self.x2 - self.x1
+    def _width_set(self, value):
+        self.x2 = self.x1 + value
+    def _height_get(self):
+        return self.y2 - self.y1
+    def _height_set(self, value):
+        self.y2 = self.y1 + value
+    
+    width = property(
+        _width_get, _width_set,
+        doc = "左辺から測定した矩形の幅"
+    )
+    height = property(
+        _height_get, _height_set,
+        doc = "上辺から測定した矩形の高さ"
+    )
+    def __repr__(self):
+        return "{}({}, {}, {}, {})".format(self.__class__.__name__, self.x1, self.y1, self.x2, self.y2)
+
+
+rectangle = Rectangle(10, 10, 25, 34)
+print(rectangle.width, rectangle.height)
+rectangle.width = 100
+print(rectangle)
+rectangle.height = 100
+print(rectangle)
+print(help(Rectangle))
+
+'''
+プロパティの動作の一部だけをオーバーライドすることは推奨されない
+プロパティの動作を変更する必要があるときは親クラスの実装を借りずに
+プロパティ用の全てのメソッドを派生クラスで書き換えることをオススメする
+'''
